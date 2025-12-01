@@ -1,0 +1,14 @@
+class ExchangeBalance1D(Base):
+    __tablename__ = "exchange_balance_1d"
+    datetime = Column(DateTime, primary_key=True, index=True)
+    value    = Column(Numeric)
+
+class ExchangeInflow(Base):
+    __tablename__ = "exchange_inflow"
+    datetime = Column(DateTime, primary_key=True, index=True)
+    value    = Column(Numeric)
+
+class ExchangeOutflow(Base):
+    __tablename__ = "exchange_outflow"
+    datetime = Column(DateTime, primary_key=True, index=True)
+    value    = Column(Numeric)

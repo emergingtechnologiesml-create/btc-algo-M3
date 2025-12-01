@@ -1,0 +1,8 @@
+def funding_seasonality(funding: pd.Series):
+    df = funding.to_frame("value")
+    df["dow"] = df.index.dayofweek
+    df["hour"] = df.index.hour
+    seasonality = df.groupby("hour")["value"].mean()
+    print("[FUNDING-SEASONALITY] by hour:")
+    print(seasonality)
+    return seasonality

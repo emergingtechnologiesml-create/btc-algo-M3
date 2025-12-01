@@ -1,0 +1,5 @@
+class OnchainVolatilityIndex(Base):
+    __tablename__ = "onchain_volatility_index"
+
+    datetime = Column(DateTime, primary_key=True, index=True)
+    value    = Column(Numeric)

@@ -1,0 +1,12 @@
+
+def time_weighted_liquidity(volume: pd.Series):
+    t = np.arange(len(volume))
+    weights = t / t.sum()
+    index = (volume.fillna(0) * weights).sum()
+    print("[TW-LIQUIDITY] index:", index)
+    return index
+
+def funding_vs_spot_corr(funding: pd.Series, returns: pd.Series, window=90):
+    aligned = pd.concat({"fund": funding, "ret": returns}, axis=1).dropna()
+    corr = aligned["fund"].rolling(window).corr(aligned["ret"])
+    return corr

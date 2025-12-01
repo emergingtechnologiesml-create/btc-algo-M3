@@ -1,0 +1,8 @@
+df["volume_z"] = rolling_zscore(df["volume"], window=200)
+df["volume_shock_flag"] = (df["volume_z"] > 3.0).astype(int)
+
+def volume_spike_summary(flags: pd.Series):
+    total = len(flags)
+    spikes = int(flags.sum())
+    ratio  = spikes / total if total else 0
+    print(f"[VOLUME-SPIKE] {spikes}/{total} bars ({ratio:.2%})")

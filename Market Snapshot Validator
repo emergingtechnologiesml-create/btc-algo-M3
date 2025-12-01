@@ -1,0 +1,9 @@
+def validate_snapshot(snap: dict):
+    required = ["timestamp", "close", "volume_24h", "ret_24h"]
+    missing = [k for k in required if k not in snap or snap[k] is None]
+    print("[SNAP-VALIDATE] missing:", missing or "OK")
+    return missing
+
+def exchange_activity_summary(trades_per_exchange: dict[str, int]):
+    for ex, count in trades_per_exchange.items():
+        print(f"[EX-ACTIVITY] {ex}: {count} trades")

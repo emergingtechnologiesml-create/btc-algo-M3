@@ -1,0 +1,7 @@
+ 
+def event_impact_prob(model, features_before_event, features_after_event):
+    p_before = model.predict_proba(features_before_event)[:, 1].mean()
+    p_after  = model.predict_proba(features_after_event)[:, 1].mean()
+    impact   = p_after - p_before
+    print(f"[EVENT-IMPACT] before={p_before:.3f} after={p_after:.3f} diff={impact:.3f}")
+    return impact

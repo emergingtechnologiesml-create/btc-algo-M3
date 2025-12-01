@@ -1,0 +1,6 @@
+def multi_chain_volatility(vol_dict: dict[str, pd.Series]):
+    stats = {}
+    for name, series in vol_dict.items():
+        stats[name] = float(series.tail(200).mean())
+    print("[MULTI-CHAIN VOL]", stats)
+    return stats

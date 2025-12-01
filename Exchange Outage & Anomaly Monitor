@@ -1,0 +1,5 @@
+def detect_data_gaps(idx: pd.DatetimeIndex) -> pd.Series:
+    diffs = idx.to_series().diff()
+    gap_counts = diffs.value_counts().sort_index()
+    print("[DATA-GAPS] observed gaps:", gap_counts.head(10))
+    return diffs

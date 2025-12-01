@@ -1,0 +1,14 @@
+class WhaleTransactionsVolume(Base):
+    __tablename__ = "whale_transaction_volume_100k_usd_to_inf"
+    datetime = Column(DateTime, primary_key=True, index=True)
+    value    = Column(Numeric)
+
+class FundingRates(Base):
+    __tablename__ = "funding_rates_aggregated_by_exchange"
+    datetime = Column(DateTime, primary_key=True, index=True)
+    value    = Column(Numeric)
+
+class ExchangeBalance(Base):
+    __tablename__ = "exchange_balance"
+    datetime = Column(DateTime, primary_key=True, index=True)
+    value    = Column(Numeric)

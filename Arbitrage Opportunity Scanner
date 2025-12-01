@@ -1,0 +1,7 @@
+def funding_diff_summary(funding_a: pd.Series, funding_b: pd.Series):
+    aligned = pd.concat({"a": funding_a, "b": funding_b}, axis=1).dropna()
+    aligned["diff"] = aligned["a"] - aligned["b"]
+    arb_flags = (aligned["diff"].abs() > 0.01).astype(int)
+    print("[FUNDING-DIFF] mean diff:", aligned["diff"].mean())
+    print("[ARB-OPP] last flags:", arb_flags.tail())
+    return aligned, arb_flags

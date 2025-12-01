@@ -1,0 +1,8 @@
+st.subheader("Key On-Chain KPIs")
+
+col1, col2, col3 = st.columns(3)
+col1.metric("Active Addrs (24h)", f"{float(active_24h[-1].value):,.0f}")
+col2.metric("Whale Volume",        f"{float(whale[-1].value):,.0f}")
+col3.metric("Funding Rate (norm)", f"{funding_df['funding_z'].iloc[-1]:.2f}")
+
+st.line_chart(funding_df[["value", "funding_z"]].tail(200))

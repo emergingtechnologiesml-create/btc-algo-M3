@@ -1,0 +1,6 @@
+def liquidity_drain(balances: pd.Series, lookback=30, drop_pct=0.2):
+    recent = balances.tail(lookback)
+    drop = (recent.iloc[-1] - recent.max()) / recent.max()
+    flag = drop < -drop_pct
+    print(f"[LIQ-DRAIN] drop={drop:.2%} flag={flag}")
+    return flag

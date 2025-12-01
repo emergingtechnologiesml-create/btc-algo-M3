@@ -1,0 +1,9 @@
+def build_market_snapshot(df: pd.DataFrame) -> dict:
+    snap = {
+        "timestamp"       : df.index.max(),
+        "close"           : float(df["close"].iloc[-1]),
+        "volume_24h"      : float(df["volume"].tail(24).sum()) if "volume" in df else None,
+        "ret_24h"         : float(df["close"].pct_change(24).iloc[-1]),
+        "volatility_24h"  : float(df["close"].pct_change().tail(24).std()),
+    }
+    print("[SNAPSHOT]", snap)

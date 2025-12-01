@@ -1,0 +1,6 @@
+def futures_spot_basis(spot: pd.Series, perp: pd.Series):
+    aligned = pd.concat({"spot": spot, "perp": perp}, axis=1).dropna()
+    aligned["basis"] = aligned["perp"] - aligned["spot"]
+    aligned["basis_z"] = (aligned["basis"] - aligned["basis"].mean()) / aligned["basis"].std()
+    print("[BASIS] latest:", aligned["basis"].iloc[-1], "z:", aligned["basis_z"].iloc[-1])
+    return aligned

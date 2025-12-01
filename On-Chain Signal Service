@@ -1,0 +1,17 @@
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+from db import SessionLocal
+from crud import MetricDataService
+
+router = APIRouter()
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+@router.get("/whale-volume")
+def whale_volume(db: Session = Depends(get_db)):
+    data = MetricDataService(db).get_whale_transactions_volume()
+    return {"metric": "whale_transaction_volume_100k_usd_to_inf", "data": data}

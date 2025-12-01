@@ -1,0 +1,15 @@
+class MetricDataService:
+    def __init__(self, db: Session):
+        self.db = db
+
+    def get_funding_rates(self):
+        return (
+            self.db.query(FundingRates)
+            .order_by(FundingRates.datetime)
+            .all()
+        )
+
+@router.get("/funding-rates")
+def funding_rates(db: Session = Depends(get_db)):
+    data = MetricDataService(db).get_funding_rates()
+    return {"metric": "funding_rates_aggregated_by_exchange", "data": data}

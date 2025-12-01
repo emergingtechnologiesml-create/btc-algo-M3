@@ -1,0 +1,7 @@
+def liquidity_risk_flags(balances, min_liq_threshold):
+    flags = []
+    for row in balances:
+        liq = float(row.value)
+        risk = liq < min_liq_threshold
+        flags.append({"datetime": row.datetime, "liquidity": liq, "risk": risk})
+    return flags

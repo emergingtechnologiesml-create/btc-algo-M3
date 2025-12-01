@@ -1,0 +1,12 @@
+def cross_asset_corr(df_a: pd.DataFrame, df_b: pd.DataFrame, col="close", window=90):
+    merged = (
+        pd.concat([
+            df_a[[col]].rename(columns={col: "asset_a"}),
+            df_b[[col]].rename(columns={col: "asset_b"})
+        ], axis=1)
+        .dropna()
+    )
+    merged["ret_a"] = merged["asset_a"].pct_change()
+    merged["ret_b"] = merged["asset_b"].pct_change()
+    corr = merged["ret_a"].rolling(window).corr(merged["ret_b"])
+    return corr

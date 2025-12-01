@@ -1,0 +1,5 @@
+def sentiment_score(pos: pd.Series, neg: pd.Series):
+    df = pd.concat({"pos": pos, "neg": neg}, axis=1).dropna()
+    df["sentiment"] = (df["pos"] - df["neg"]) / (df["pos"] + df["neg"]).replace(0, np.nan)
+    print("[SENTIMENT] last:", df["sentiment"].iloc[-1])
+    return df["sentiment"]

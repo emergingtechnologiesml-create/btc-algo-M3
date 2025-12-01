@@ -1,0 +1,6 @@
+def exchange_reliability(gap_series: pd.Series):
+    total = len(gap_series)
+    outages = (gap_series > gap_series.median() * 5).sum()
+    score = 1.0 - (outages / total if total else 0.0)
+    print(f"[EX-RELIABILITY] outages={outages} score={score:.3f}")
+    return max(0.0, min(1.0, score))

@@ -1,0 +1,15 @@
+class MetricDataService:
+    ...
+    def get_exchange_balance(self):
+        return (
+            self.db.query(ExchangeBalance)
+            .order_by(ExchangeBalance.datetime)
+            .all()
+        )
+
+    def get_exchange_inflow(self):
+        return (
+            self.db.query(ExchangeInflow)
+            .order_by(ExchangeInflow.datetime)
+            .all()
+        )

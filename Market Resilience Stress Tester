@@ -1,0 +1,8 @@
+from sklearn.cluster import KMeans
+
+def volatility_regime_clusters(std_ret: pd.Series, n_clusters=3):
+    X = std_ret.dropna().values.reshape(-1, 1)
+    model = KMeans(n_clusters=n_clusters, random_state=42)
+    labels = model.fit_predict(X)
+    print("[REGIME-CLUSTERS] counts:", np.bincount(labels))
+    return labels, model

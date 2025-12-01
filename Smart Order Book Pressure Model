@@ -1,0 +1,6 @@
+def order_book_pressure(buy_vol: pd.Series, sell_vol: pd.Series):
+    df = pd.concat({"buy": buy_vol, "sell": sell_vol}, axis=1).dropna()
+    df["pressure"] = (df["buy"] - df["sell"]) / (df["buy"] + df["sell"]).replace(0, np.nan)
+    df["imbalance_flag"] = (df["pressure"].abs() > 0.6).astype(int)
+    print("[ORDER-PRESSURE] latest:", df["pressure"].iloc[-1])
+    return df

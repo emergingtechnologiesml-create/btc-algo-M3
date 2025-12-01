@@ -1,0 +1,7 @@
+def liquidity_zones(df: pd.DataFrame, price_col="close", window=200, bins=20):
+    prices = df[price_col].tail(window)
+    hist, edges = np.histogram(prices, bins=bins)
+    zones = [{"low": float(edges[i]), "high": float(edges[i+1]), "hits": int(hist[i])}
+             for i in range(len(hist))]
+    zones = sorted(zones, key=lambda z: z["hits"], reverse=True)
+    return zones[:5]  

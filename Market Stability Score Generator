@@ -1,0 +1,7 @@
+ def market_stability_score(df: pd.DataFrame):
+    vol_score   = 1 / (1 + df["vol"].tail(200).mean())
+    dd_report   = build_drawdown_report(df["std_ret_fwd"])
+    dd_score    = 1 + dd_report["dd"].tail(200).min()   # closer to 1 is better
+    shock_rate  = 1 - df["volume_shock_flag"].tail(200).mean()
+    score = max(0.0, min(1.0, 0.4*vol_score + 0.3*dd_score + 0.3*shock_rate))
+    return score

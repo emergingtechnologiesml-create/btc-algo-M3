@@ -1,0 +1,6 @@
+def reversal_probability(std_ret: pd.Series, window=50):
+    last = std_ret.iloc[-window:]
+    mean = last.mean()
+    prob = 1 / (1 + np.exp(5 * mean))  # toy logistic
+    print(f"[REVERSAL-PROB] mean_ret={mean:.4f} prob={prob:.3f}")
+    return prob

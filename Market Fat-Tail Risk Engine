@@ -1,0 +1,5 @@
+def fat_tail_risk(std_ret: pd.Series):
+    kurt = std_ret.kurtosis()
+    tail_risk = max(0.0, min(1.0, (kurt - 3) / 10))  # normal ~3
+    print(f"[FAT-TAIL] kurtosis={kurt:.2f} risk={tail_risk:.2f}")
+    return tail_risk

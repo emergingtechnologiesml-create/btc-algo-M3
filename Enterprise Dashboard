@@ -1,0 +1,11 @@
+import streamlit as st
+import pandas as pd
+
+st.title("On-Chain Enterprise Dashboard")
+
+df_bal = pd.DataFrame(
+    [{"datetime": r.datetime, "value": float(r.value)} for r in balances]
+).set_index("datetime")
+
+st.metric("Current Exchange Balance", f"{df_bal['value'].iloc[-1]:,.0f}")
+st.line_chart(df_bal["value"].tail(200))

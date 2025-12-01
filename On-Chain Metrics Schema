@@ -1,0 +1,17 @@
+from sqlalchemy import Column, DateTime, Numeric
+from db import Base
+
+class ActiveAddresses24h(Base):
+    __tablename__ = "active_addresses_24h"
+    datetime = Column(DateTime, primary_key=True, index=True)
+    value    = Column(Numeric)
+
+class DailyActiveAddresses(Base):
+    __tablename__ = "daily_active_addresses"
+    datetime = Column(DateTime, primary_key=True, index=True)
+    value    = Column(Numeric)
+
+class VolumeUsd(Base):
+    __tablename__ = "volume_usd"
+    datetime = Column(DateTime, primary_key=True, index=True)
+    value    = Column(Numeric)

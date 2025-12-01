@@ -1,0 +1,7 @@
+def normalize_funding_series(rows):
+    df = pd.DataFrame(
+        [{"datetime": r.datetime, "value": float(r.value)} for r in rows]
+    ).set_index("datetime")
+    z = (df["value"] - df["value"].mean()) / df["value"].std()
+    df["funding_z"] = z.clip(-3, 3)
+    return df
